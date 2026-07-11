@@ -1,159 +1,102 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { BsFillPersonLinesFill } from 'react-icons/bs';
-// import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react'
 
-const Navbar = () => {
-  const [nav, setNav] = useState(false);
-  const [shadow, setShadow] = useState(false);
-  const [navBg, setNavBg] = useState('#ecf0f3');
-  const [linkColor, setLinkColor] = useState('#1f2937');
-  // const [position, setPosition] = useState('fixed')
-  // const router = useRouter();
+const LINKS = [
+  { label: 'Home',       href: '#home'        },
+  { label: 'Experience', href: '#experience'  },
+  { label: 'Projects',   href: '#projects'    },
+  { label: 'Skills',     href: '#skills'      },
+  { label: 'Leadership', href: '#leadership'  },
+  { label: 'Contact',    href: '#contact'     },
+]
 
-  // useEffect(() => {
-  //   if (
-  //     router.asPath === '/property' ||
-  //     router.asPath === '/crypto' ||
-  //     router.asPath === '/netflix' ||
-  //     router.asPath === '/twitch'
-  //   ) {
-  //     setNavBg('transparent');
-  //     setLinkColor('#ecf0f3');
-  //   } else {
-  //     setNavBg('#ecf0f3');
-  //     setLinkColor('#1f2937');
-  //   }
-  // }, [router]);
+const NAVBAR_HEIGHT = 52 // px — must match nav height below
 
-  const handleNav = () => {
-    setNav(!nav);
-  };
+// Custom smooth scroll — bypasses OS "reduce motion" settings
+function smoothScrollTo(targetY, duration = 500) {
+  const startY = window.pageYOffset
+  const diff = targetY - startY
+  let startTime = null
+
+  function step(currentTime) {
+    if (startTime === null) startTime = currentTime
+    const elapsed = currentTime - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    const ease = progress < 0.5
+      ? 2 * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 2) / 2
+    window.scrollTo(0, startY + diff * ease)
+    if (elapsed < duration) requestAnimationFrame(step)
+  }
+  requestAnimationFrame(step)
+}
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleShadow = () => {
-      if (window.scrollY >= 90) {
-        setShadow(true);
-      } else {
-        setShadow(false);
-      }
-    };
-    window.addEventListener('scroll', handleShadow);
-  }, []);
+    const handler = () => setScrolled(window.scrollY > 8)
+    window.addEventListener('scroll', handler, { passive: true })
+    return () => window.removeEventListener('scroll', handler)
+  }, [])
+
+  const handleAnchorClick = (e, href) => {
+    e.preventDefault()
+    
+    // Jika tidak di halaman home, navigate ke home dengan hash anchor
+    if (typeof window !== 'undefined' && window.location.pathname !== '/') {
+      window.location.href = '/' + href  // /#home, /#experience, dll
+      return
+    }
+    
+    // Jika di halaman home, smooth scroll ke section
+    const target = document.querySelector(href)
+    if (!target) return
+    const top = Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT)
+    smoothScrollTo(top, 500)
+  }
+
+  const linkStyle = {
+    fontSize: '10.5px', fontWeight: 700,
+    textTransform: 'uppercase', letterSpacing: '.14em',
+    color: '#5A5040', padding: '0 18px',
+    display: 'flex', alignItems: 'center',
+    borderLeft: '1px solid #1A1810',
+    transition: 'all .15s', cursor: 'pointer',
+  }
 
   return (
-    <div
-      style={{ backgroundColor: `${navBg}` }}
-      className={
-        shadow
-          ? 'fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300'
-          : 'fixed w-full h-20 z-[100]'
-      }
-    >
-      <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
-        <div>
-          <ul style={{ color: `${linkColor}` }} className='hidden md:flex'>
-            <li className='ml-10 text-sm uppercase hover:border-b'>
-              <Link href='/'>Home</Link>
-            </li>
-            <li className='ml-10 text-sm uppercase hover:border-b'>
-              <Link href='/#about'>About</Link>
-            </li>
-            <li className='ml-10 text-sm uppercase hover:border-b'>
-              <Link href='/#skills'>Skills</Link>
-            </li>
-            <li className='ml-10 text-sm uppercase hover:border-b'>
-              <Link href='/#projects'>Projects</Link>
-            </li>
-            <li className='ml-10 text-sm uppercase hover:border-b'>
-              <Link href='https://drive.google.com/file/d/1sJmCZGuJK_oN0shqTgUb1Yezuv0QXX1r/view?usp=drive_link'>Resume</Link>
-            </li>
-            <li className='ml-10 text-sm uppercase hover:border-b'>
-              <Link href='/#contact'>Contact</Link>
-            </li>
-          </ul>
-          {/* Hamburger Icon */}
-          <div
-            style={{ color: `${linkColor}` }}
-            onClick={handleNav}
-            className='md:hidden'
+    <nav style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      height: `${NAVBAR_HEIGHT}px`, background: 'var(--ink)',
+      display: 'flex', alignItems: 'stretch', justifyContent: 'flex-end',
+      borderBottom: '3px solid var(--burg)',
+      boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.4)' : 'none',
+      transition: 'box-shadow 0.2s',
+      fontFamily: 'var(--sans)',
+    }}>
+      <div style={{ display: 'flex' }}>
+        {LINKS.map((l) => (
+          <a key={l.href} href={l.href} style={linkStyle}
+            onClick={(e) => handleAnchorClick(e, l.href)}
+            onMouseEnter={e => { e.currentTarget.style.color = 'var(--paper)'; e.currentTarget.style.background = '#1A1810' }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#5A5040'; e.currentTarget.style.background = 'transparent' }}
           >
-            <AiOutlineMenu size={25} />
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {/* Overlay */}
-      <div
-        className={
-          nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70' : ''
-        }
-      >
-        {/* Side Drawer Menu */}
-        <div
-          className={
-            nav
-              ? ' fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-10 ease-in duration-500'
-              : 'fixed left-[-100%] top-0 p-10 ease-in duration-500'
-          }
+            {l.label}
+          </a>
+        ))}
+        <a href="/resume" style={{
+          ...linkStyle,
+          color: 'var(--paper)',
+          borderLeft: '1px solid var(--burg)',
+          background: 'var(--burg)',
+          padding: '0 20px',
+        }}
+          onMouseEnter={e => e.currentTarget.style.background = '#6E1414'}
+          onMouseLeave={e => e.currentTarget.style.background = 'var(--burg)'}
         >
-          <div>
-            <div className='flex w-full items-center justify-between'>
-              <div
-                onClick={handleNav}
-                className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'
-              >
-                <AiOutlineClose />
-              </div>
-            </div>
-            <div className='border-b border-gray-300 my-4'>
-              <p className='w-[85%] md:w-[90%] py-4'>
-                Let&#39;s build something legendary together
-              </p>
-            </div>
-          </div>
-          <div className='py-4 flex flex-col'>
-            <ul className='uppercase'>
-              <Link href='/'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Home
-                </li>
-              </Link>
-              <Link href='/#about'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  About
-                </li>
-              </Link>
-              <Link href='/#skills'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Skills
-                </li>
-              </Link>
-              <Link href='/#projects'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Projects
-                </li>
-              </Link>
-              <Link href='/#contact'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Contact
-                </li>
-              </Link>
-            </ul>
-            <div className='pt-40'>
-              <p className='uppercase tracking-widest text-[#5651e5]'>
-                Let&#39;s Connect
-              </p>
-            </div>
-          </div>
-        </div>
+          Resume ↗
+        </a>
       </div>
-    </div>
-  );
-};
-
-export default Navbar;
+    </nav>
+  )
+}

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import Thesis from '../public/assets/projects/thesis_pic.png';
+import Thesis from '../public/assets/projects/thesis_1.png';
 import { RiRadioButtonFill } from 'react-icons/ri';
 import Link from 'next/link';
 

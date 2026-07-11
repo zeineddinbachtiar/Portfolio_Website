@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import propertyImg from '../public/assets/projects/property.jpg';
 import { RiRadioButtonFill } from 'react-icons/ri';
 import Link from 'next/link';
 
@@ -13,7 +12,7 @@ const property = () => {
           className='absolute z-1'
           layout='fill'
           objectFit='cover'
-          src={propertyImg}
+          src="/assets/projects/property.jpg"
           alt='/'
         />
         <div className='absolute top-[70%] max-w-[1240px] w-full left-[50%] right-[50%] translate-x-[-50%] translate-y-[-50%] text-white z-10 p-2'>
