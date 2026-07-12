@@ -12,7 +12,7 @@ export default function Footer() {
     <footer id="contact">
 
       {/* 3-column: text | photo | contacts */}
-      <div style={{
+      <div className="footer-grid" style={{
         display: 'grid',
         gridTemplateColumns: '1.3fr 1px 1fr 1px 1.1fr',
         borderTop: '3px solid var(--ink)',
@@ -20,7 +20,7 @@ export default function Footer() {
       }}>
 
         {/* Left — headline */}
-        <div style={{ padding: '40px 32px 40px 0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div className="footer-text" style={{ padding: '40px 32px 40px 0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <div style={{
             fontFamily: 'var(--serif)',
             fontSize: 'clamp(32px,5vw,56px)',
@@ -37,10 +37,10 @@ export default function Footer() {
           </p>
         </div>
 
-        <div style={{ background: 'var(--ink)', width: '1px' }} />
+        <div className="footer-divider" style={{ background: 'var(--ink)', width: '1px' }} />
 
         {/* Middle — photo */}
-        <div style={{ padding: '32px 24px', display: 'flex', flexDirection: 'column' }}>
+        <div className="footer-photo" style={{ padding: '32px 24px', display: 'flex', flexDirection: 'column' }}>
           <div style={{
             flex: 1, background: '#C8B888', minHeight: '260px',
             display: 'flex', flexDirection: 'column',
@@ -57,10 +57,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ background: 'var(--ink)', width: '1px' }} />
+        <div className="footer-divider" style={{ background: 'var(--ink)', width: '1px' }} />
 
         {/* Right — contacts */}
-        <div style={{ padding: '40px 0 40px 32px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div className="footer-contacts" style={{ padding: '40px 0 40px 32px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           {CONTACTS.map((c, i) => (
             <a key={i} href={c.href}
               target={c.href.startsWith('http') ? '_blank' : undefined}
@@ -83,7 +83,7 @@ export default function Footer() {
       </div>
 
       {/* Small print */}
-      <div style={{
+      <div className="footer-legal" style={{
         borderTop: '1px solid var(--rule)', padding: '10px 24px',
         display: 'flex', justifyContent: 'space-between',
         fontSize: '8.5px', color: 'var(--muted)',

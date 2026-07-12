@@ -56,13 +56,13 @@ export default function Leadership() {
         <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '2px', justifyContent: 'flex-end', height: '100%' }}>
           <span style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 500 }}>Institutional contribution</span>
         </div>
-        <div style={{ borderLeft: '1px solid var(--ink)', padding: '0 0 0 20px', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--muted)', fontWeight: 700, display: 'flex', alignItems: 'center', height: '100%' }}>
+        <div className="leadership-header-date" style={{ borderLeft: '1px solid var(--ink)', padding: '0 0 0 20px', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--muted)', fontWeight: 700, display: 'flex', alignItems: 'center', height: '100%' }}>
           2023 — 2025
         </div>
       </div>
 
-      {/* Horizontal timeline */}
-      <div style={{
+      {/* Horizontal timeline (desktop)*/}
+      <div className="leadership-zigzag" style={{
         display: 'grid',
         gridTemplateColumns: `repeat(${LEADERSHIP.length}, 1fr)`,
         gridTemplateRows: '272px 28px 248px',
@@ -129,6 +129,12 @@ export default function Leadership() {
             </Fragment>
           )
         })}
+      </div>
+      {/* Vertical stack (mobile) */}
+      <div className="leadership-mobile" style={{ display: 'none', flexDirection: 'column', alignItems: 'center', gap: '20px', padding: '32px 0 40px' }}>
+        {LEADERSHIP.map((item, i) => (
+          <Card key={i} item={item} />
+        ))}
       </div>
     </div>
   )

@@ -52,21 +52,19 @@ export default function Experience() {
         <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '2px', justifyContent: 'flex-end', height: '100%' }}>
           <span style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 500 }}>Professional track record</span>
         </div>
-        <div style={{ borderLeft: '1px solid var(--ink)', padding: '0 0 0 20px', fontSize: '12.5px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--muted)', fontWeight: 700, display: 'flex', alignItems: 'center', height: '100%' }}>
+        <div className="exp-header-date" style={{ borderLeft: '1px solid var(--ink)', padding: '0 0 0 20px', fontSize: '12.5px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--muted)', fontWeight: 700, display: 'flex', alignItems: 'center', height: '100%' }}>
           2024 — 2026
         </div>
       </div>
 
-      {/* Zigzag timeline */}
-      <div style={{ position: 'relative' }}>
-
-        {/* Centre spine */}
-        <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: 0, bottom: 0, width: '1px', background: 'var(--ink)' }} />
+      {/* Desktop — zigzag timeline */}
+      <div className="exp-zigzag" style={{ position: 'relative' }}>
+        <div className="exp-spine" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: 0, bottom: 0, width: '1px', background: 'var(--ink)' }} />
 
         {EXPERIENCE.map((exp, i) => {
           const isLeft = i % 2 === 0
           return (
-            <div key={i} style={{
+            <div key={i} className="exp-row" style={{
               display: 'grid',
               gridTemplateColumns: '1fr 48px 1fr',
               alignItems: 'start',
@@ -74,59 +72,41 @@ export default function Experience() {
               borderBottom: i < EXPERIENCE.length - 1 ? '1px solid var(--rule)' : 'none',
               position: 'relative',
             }}>
-
-              {/* Content */}
               {isLeft ? (
                 <>
                   <div style={{ paddingRight: '36px' }}>
-                    <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 700, lineHeight: 1.1, marginBottom: '3px', letterSpacing: '-.01em', textAlign: 'right' }}>
-                      {exp.role}
-                    </div>
-                    <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--burg)', fontWeight: 800, marginBottom: '12px', textAlign: 'right' }}>
-                      {exp.org}
-                    </div>
+                    <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 700, lineHeight: 1.1, marginBottom: '3px', letterSpacing: '-.01em', textAlign: 'right' }}>{exp.role}</div>
+                    <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--burg)', fontWeight: 800, marginBottom: '12px', textAlign: 'right' }}>{exp.org}</div>
                     <ul style={{ listStyle: 'none' }}>
                       {exp.points.map((pt, j) => (
                         <li key={j} style={{ fontSize: '14px', color: 'var(--muted)', fontWeight: 500, padding: '3px 0 3px 12px', position: 'relative', lineHeight: 1.6, textAlign: 'left' }}>
-                          <span style={{ position: 'absolute', left: '2px', color: 'var(--burg)', fontWeight: 900 }}>·</span>
-                          {pt}
+                          <span style={{ position: 'absolute', left: '2px', color: 'var(--burg)', fontWeight: 900 }}>·</span>{pt}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  {/* Node */}
                   <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>
                     <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: 'var(--burg)', border: '2px solid var(--paper)', outline: '1.5px solid var(--burg)', position: 'relative', zIndex: 1 }} />
                   </div>
                   <div style={{ paddingRight: '12px' }}>
-                    <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--burg)', fontWeight: 900, marginBottom: '8px', textAlign: 'left' }}>
-                      {exp.period} · {exp.location}
-                    </div>
+                    <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--burg)', fontWeight: 900, marginBottom: '8px', textAlign: 'left' }}>{exp.period} · {exp.location}</div>
                   </div>
                 </>
               ) : (
                 <>
                   <div style={{ paddingLeft: '12px', textAlign: 'right' }}>
-                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--burg)', fontWeight: 900, marginBottom: '8px' }}>
-                      {exp.period} · {exp.location}
-                    </div>
+                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--burg)', fontWeight: 900, marginBottom: '8px' }}>{exp.period} · {exp.location}</div>
                   </div>
-                  {/* Node */}
                   <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>
                     <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: 'var(--burg)', border: '2px solid var(--paper)', outline: '1.5px solid var(--burg)', position: 'relative', zIndex: 1 }} />
                   </div>
                   <div style={{ paddingLeft: '36px' }}>
-                    <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 700, lineHeight: 1.1, marginBottom: '3px', letterSpacing: '-.01em', textAlign: 'left' }}>
-                      {exp.role}
-                    </div>
-                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--burg)', fontWeight: 800, marginBottom: '12px', textAlign: 'left' }}>
-                      {exp.org}
-                    </div>
+                    <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 700, lineHeight: 1.1, marginBottom: '3px', letterSpacing: '-.01em' }}>{exp.role}</div>
+                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--burg)', fontWeight: 800, marginBottom: '12px' }}>{exp.org}</div>
                     <ul style={{ listStyle: 'none' }}>
                       {exp.points.map((pt, j) => (
-                        <li key={j} style={{ fontSize: '14px', color: 'var(--muted)', fontWeight: 500, padding: '3px 0 3px 12px', position: 'relative', lineHeight: 1.6, textAlign: 'left' }}>
-                          <span style={{ position: 'absolute', left: '2px', color: 'var(--burg)', fontWeight: 900 }}>·</span>
-                          {pt}
+                        <li key={j} style={{ fontSize: '14px', color: 'var(--muted)', fontWeight: 500, padding: '3px 0 3px 12px', position: 'relative', lineHeight: 1.6 }}>
+                          <span style={{ position: 'absolute', left: '2px', color: 'var(--burg)', fontWeight: 900 }}>·</span>{pt}
                         </li>
                       ))}
                     </ul>
@@ -137,6 +117,30 @@ export default function Experience() {
           )
         })}
       </div>
+
+      {/* Mobile — single column list */}
+      <div className="exp-mobile">
+        {EXPERIENCE.map((exp, i) => (
+          <div key={i} style={{
+            padding: '24px 0',
+            borderBottom: i < EXPERIENCE.length - 1 ? '1px solid var(--rule)' : 'none',
+          }}>
+            <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '.16em', color: 'var(--burg)', fontWeight: 900, marginBottom: '8px' }}>
+              {exp.period} · {exp.location}
+            </div>
+            <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 700, lineHeight: 1.1, marginBottom: '3px' }}>{exp.role}</div>
+            <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--burg)', fontWeight: 800, marginBottom: '12px' }}>{exp.org}</div>
+            <ul style={{ listStyle: 'none' }}>
+              {exp.points.map((pt, j) => (
+                <li key={j} style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 500, padding: '3px 0 3px 12px', position: 'relative', lineHeight: 1.6 }}>
+                  <span style={{ position: 'absolute', left: '2px', color: 'var(--burg)', fontWeight: 900 }}>·</span>{pt}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
     </div>
   )
 }

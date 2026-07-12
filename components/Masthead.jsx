@@ -1,6 +1,6 @@
 export default function Masthead() {
   return (
-    <header style={{
+    <header id="home" style={{
       background: 'var(--paper)',
       borderBottom: '3px solid var(--ink)',
       overflow: 'hidden',
@@ -8,7 +8,7 @@ export default function Masthead() {
     }}>
 
       {/* Top metadata strip */}
-      <div style={{
+      <div className="mstrip" style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1px 1fr 1px 1fr 1px 1fr',
         borderBottom: '1px solid var(--ink)',
@@ -31,26 +31,26 @@ export default function Masthead() {
       </div>
 
       {/* Giant nameplate */}
-      <div style={{ padding: '18px 24px 16px', borderBottom: '1px solid var(--rule)' }}>
+      <div className="nameplate-wrap" style={{ padding: '18px 24px 16px', borderBottom: '1px solid var(--rule)' }}>
         <div style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.22em', color: 'var(--burg)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ display: 'block', width: '16px', height: '1px', background: 'var(--burg)' }} />
           Portfolio — Edition Q2 2026
         </div>
         <div style={{ fontFamily: 'var(--serif)', fontWeight: 700, lineHeight: .84, letterSpacing: '-.04em' }}>
-          <span style={{ fontSize: 'clamp(56px,9vw,104px)', display: 'block', color: 'var(--burg)' }}>ZEINEDDIN</span>
-          <span style={{ fontSize: 'clamp(56px,9vw,104px)', display: 'block', color: 'var(--ink)', fontStyle: 'italic', paddingLeft: 'clamp(12px,2vw,28px)' }}>Ahmad Bachtiar.</span>
+          <span style={{ fontSize: 'clamp(44px,9vw,104px)', display: 'block', color: 'var(--burg)' }}>ZEINEDDIN</span>
+          <span style={{ fontSize: 'clamp(44px,9vw,104px)', display: 'block', color: 'var(--ink)', fontStyle: 'italic', paddingLeft: 'clamp(8px,2vw,28px)' }}>Ahmad Bachtiar.</span>
         </div>
       </div>
 
       {/* 4-zone hero */}
-      <div style={{
+      <div className="hero-grid" style={{
         display: 'grid',
         gridTemplateColumns: '2.6fr 1px 1.2fr 1px 1.1fr 1px 1fr',
         minHeight: '320px',
       }}>
 
         {/* Zone 1 — summary */}
-        <div style={{ padding: '24px 24px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className="zone1" style={{ padding: '24px 24px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
             <div style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--burg)', marginBottom: '12px', borderBottom: '1px solid var(--rule)', paddingBottom: '6px' }}>
               The Core Thesis
@@ -65,7 +65,7 @@ export default function Masthead() {
               Computer Engineering graduate from ITS with hands-on experience across data analysis, software development, and business process design — comfortable moving between technical build and structured business work. Open to ODP / MT, Business and Data Analyst, Operations, and Software Developer roles.
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '20px', paddingLeft: '24px' }}>
+          <div className="zone1-btns" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '20px', paddingLeft: '24px' }}>
             <a href="/resume" style={{ padding: '10px 18px', fontSize: '10.5px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.14em', background: 'var(--ink)', color: 'var(--paper)', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'background .18s', cursor: 'pointer' }}
               onMouseEnter={e => e.currentTarget.style.background = 'var(--burg)'}
               onMouseLeave={e => e.currentTarget.style.background = 'var(--ink)'}
@@ -81,10 +81,10 @@ export default function Masthead() {
           </div>
         </div>
 
-        <div style={{ background: 'var(--ink)', width: '1px' }} />
+        <div className="vdiv" style={{ background: 'var(--ink)', width: '1px' }} />
 
         {/* Zone 2 — photo */}
-        <div style={{ background: '#C8B888', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+        <div className="zone2" style={{ background: '#C8B888', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(12,10,7,.05) 2px,rgba(12,10,7,.05) 3px)', pointerEvents: 'none' }} />
             <img
@@ -98,39 +98,39 @@ export default function Masthead() {
           </div>
         </div>
 
-        <div style={{ background: 'var(--ink)', width: '1px' }} />
+        <div className="vdiv" style={{ background: 'var(--ink)', width: '1px' }} />
 
         {/* Zone 3 — stats */}
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {[
+        <div className="zone3" style={{ display: 'flex', flexDirection: 'column' }}>
+          {[
             { n: '3.34', l: 'GPA / 4.00',       s: 'Institut Teknologi Sepuluh Nopember' },
-            { n: '3',    l: 'Work Experiences', s: 'Ops · Dev · Research'               },
-            { n: '17',   l: 'Certifications',   s: 'Microsoft · Snowflake · IBM'       },
-            { n: '4',    l: 'Projects',         s: 'Data · IoT · Automation'            },
-        ].map((stat, i) => (
-            <div key={i} style={{
-            flex: 1, padding: '0 18px',
-            borderBottom: i < 3 ? '1px solid var(--rule)' : 'none',
-            display: 'flex', flexDirection: 'column', justifyContent: 'center',
-            minHeight: '78px',
+            { n: '3',    l: 'Work Experiences',  s: 'Ops · Dev · Research'               },
+            { n: '17',   l: 'Certifications',    s: 'Microsoft · Snowflake · IBM'        },
+            { n: '4',    l: 'Projects',          s: 'Data · IoT · Automation'            },
+          ].map((stat, i) => (
+            <div key={i} className="zone3-item" style={{
+              flex: 1, padding: '0 18px',
+              borderBottom: i < 3 ? '1px solid var(--rule)' : 'none',
+              display: 'flex', flexDirection: 'column', justifyContent: 'center',
+              minHeight: '78px',
             }}>
-            <div style={{ fontFamily: 'var(--serif)', fontSize: '28px', fontWeight: 700, lineHeight: 1, color: 'var(--ink)' }}>{stat.n}</div>
-            <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--muted)', fontWeight: 800, marginTop: '3px' }}>{stat.l}</div>
-            <div style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 400, marginTop: '1px' }}>{stat.s}</div>
+              <div style={{ fontFamily: 'var(--serif)', fontSize: '28px', fontWeight: 700, lineHeight: 1, color: 'var(--ink)' }}>{stat.n}</div>
+              <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--muted)', fontWeight: 800, marginTop: '3px' }}>{stat.l}</div>
+              <div style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 400, marginTop: '1px' }}>{stat.s}</div>
             </div>
-        ))}
+          ))}
         </div>
 
-        <div style={{ background: 'var(--ink)', width: '1px' }} />
+        <div className="vdiv" style={{ background: 'var(--ink)', width: '1px' }} />
 
         {/* Zone 4 — status */}
-        <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 18px', gap: 0 }}>
+        <div className="zone4" style={{ display: 'flex', flexDirection: 'column', padding: '20px 18px', gap: 0 }}>
           {[
             { label: 'Status', lines: ['Open to full-time roles', 'ODP · Management Trainee', 'Business and Data Analytics', 'Software Developer'] },
             { label: 'Education', lines: ['Institut Teknologi Sepuluh Nopember', 'B.Eng Computer Engineering', 'Aug 2021 – Aug 2025'] },
             { label: 'Based In', lines: ['Surabaya, Indonesia', '+62 812 3386 2025'] },
           ].map((block, i, arr) => (
-            <div key={i} style={{ paddingBottom: '18px', marginBottom: '18px', borderBottom: i < arr.length - 1 ? '1px solid var(--rule)' : 'none' }}>
+            <div key={i} className="zone4-block" style={{ paddingBottom: '18px', marginBottom: '18px', borderBottom: i < arr.length - 1 ? '1px solid var(--rule)' : 'none' }}>
               <div style={{ fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.2em', color: 'var(--burg)', marginBottom: '8px', borderBottom: '1px solid var(--rule)', paddingBottom: '5px' }}>
                 {block.label}
               </div>
