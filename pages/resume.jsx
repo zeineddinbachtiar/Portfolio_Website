@@ -106,17 +106,18 @@ function TechGrid({ chips }) {
 export default function Resume() {
   const [filter, setFilter] = useState(null)
   const [dlActive, setDlActive] = useState('general')
+  const [mobileTab, setMobileTab] = useState(0)
 
   const toggle = (key) => setFilter(f => f === key ? null : key)
 
   const downloadCV = (variant) => {
     setDlActive(variant)
     const map = {
-      general: '/CV_Zeineddin_Ahmad_Bachtiar_-_General.pdf',
-      ops:     '/CV_Zeineddin_Ahmad_Bachtiar_-_Business__2_.pdf',
-      odp:     '/CV_Zeineddin_Ahmad_Bachtiar_-_ODP_MT__2_.pdf',
-      data:    '/CV_Zeineddin_Ahmad_Bachtiar_-_Business__2_.pdf',
-      dev:     '/CV_Zeineddin_Ahmad_Bachtiar_-_Software_Developer.pdf',
+      general: '/assets/CV/CV_Zeineddin_Ahmad_Bachtiar_-_General.pdf',
+      ops:     '/assets/CV/CV_Zeineddin_Ahmad_Bachtiar_-_Business_Ops.pdf',
+      odp:     '/assets/CV/CV_Zeineddin_Ahmad_Bachtiar_-_ODP_MT.pdf',
+      data:    '/assets/CV/CV_Zeineddin_Ahmad_Bachtiar_-_Business_Data.pdf',
+      dev:     '/assets/CV/CV_Zeineddin_Ahmad_Bachtiar_-_Software_Developer.pdf',
     }
     const a = document.createElement('a')
     a.href = map[variant]; a.download = map[variant].split('/').pop()
@@ -143,7 +144,7 @@ export default function Resume() {
   const skCell = (label, content, ops, odp, biz, dev, right, last) => {
     const rel = !filter || { ops, odp, biz, dev }[filter]
     return (
-      <div style={{
+      <div className="resume-skcell" style={{
         padding: right ? '14px 0 14px 20px' : '14px 20px 14px 0',
         borderBottom: last ? 'none' : '1px solid var(--rule)',
         borderRight: right ? 'none' : '1px solid var(--rule)',
@@ -164,16 +165,34 @@ export default function Resume() {
     return [...items].sort((a,b) => (b[filter] ? 1 : 0) - (a[filter] ? 1 : 0))
   }
 
+  const SIDEBAR = [
+    { label:'Contact', items:['zeineddinbachtiar@gmail.com','linkedin.com/in/zeineddin-ahmad-bachtiar','+62 812 3386 2025','Surabaya, Indonesia'] },
+    { label:'Education', items:[<><strong>ITS Surabaya</strong></>, 'B.Eng Computer Engineering', 'Aug 2021 – Aug 2025', 'GPA 3.34 / 4.00'] },
+    { label:'Languages', items:['Indonesian — Native','English — Professional'] },
+  ]
+
+  const KEY_NUMBERS = [
+    { value:'3.34', label:'GPA / 4.00', accent:true },
+    { value:'3', label:'Work Experiences' },
+    { value:'17', label:'Certifications' },
+    { value:'4', label:'Projects' },
+  ]
+
+  const sidebarSectionsDesktop = [
+    ...SIDEBAR,
+    { label:'Key Numbers', items: KEY_NUMBERS.map((kn,i) => <span key={i}><strong>{kn.value}</strong> {kn.label}</span>) },
+  ]
+
   return (
     <>
       <Head><title>Resume — Zeineddin Ahmad Bachtiar</title></Head>
       <Navbar />
 
       {/* PAGE HEADER */}
-      <div style={{ borderBottom:'3px solid var(--ink)', padding:'0 28px', marginTop:'52px' }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'8px 0', borderBottom:'1px solid var(--rule)', fontSize:'11px', textTransform:'uppercase', letterSpacing:'.14em', color:'var(--muted)', fontWeight:700 }}>
+      <div className="resume-header" style={{ borderBottom:'3px solid var(--ink)', padding:'0 28px', marginTop:'52px' }}>
+        <div className="resume-toprow" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'8px 0', borderBottom:'1px solid var(--rule)', fontSize:'11px', textTransform:'uppercase', letterSpacing:'.14em', color:'var(--muted)', fontWeight:700 }}>
           <span>Zeineddin Ahmad Bachtiar · Curriculum Vitae · Q2 2026</span>
-          <div style={{ display:'flex' }}>
+          <div className="resume-dlbtns" style={{ display:'flex' }}>
             <DlBtn label="General CV"     variant="general" />
             <DlBtn label="Business Ops"   variant="ops" />
             <DlBtn label="ODP / MT"       variant="odp" />
@@ -182,24 +201,24 @@ export default function Resume() {
           </div>
         </div>
 
-        <div style={{ padding:'20px 0 0', display:'flex', justifyContent:'space-between', alignItems:'flex-end' }}>
+        <div className="resume-titlerow" style={{ padding:'20px 0 0', display:'flex', justifyContent:'space-between', alignItems:'flex-end' }}>
           <div style={{ fontFamily:'var(--serif)', fontSize:'clamp(36px,5vw,60px)', fontWeight:700, lineHeight:.88, letterSpacing:'-.03em' }}>
             Curriculum<br /><em style={{ fontStyle:'italic', color:'var(--burg)' }}>Vitae.</em>
           </div>
-          <div style={{ fontFamily:'var(--serif)', fontStyle:'italic', fontSize:'14px', color:'var(--muted)', textAlign:'right', paddingBottom:'4px', lineHeight:1.5 }}>
+          <div className="resume-eduinfo" style={{ fontFamily:'var(--serif)', fontStyle:'italic', fontSize:'14px', color:'var(--muted)', textAlign:'right', paddingBottom:'4px', lineHeight:1.5 }}>
             Computer Engineering<br />Institut Teknologi Sepuluh Nopember · 2025
           </div>
         </div>
 
         {/* Filter bar */}
-        <div style={{ display:'flex', alignItems:'center', marginTop:'18px', borderTop:'1px solid var(--rule)', padding:'10px 0' }}>
-          <span style={{ fontSize:'11px', textTransform:'uppercase', letterSpacing:'.18em', color:'var(--muted)', fontWeight:900, paddingRight:'20px', borderRight:'1px solid var(--rule)', marginRight:'16px' }}>
+        <div className="resume-filterbar" style={{ display:'flex', alignItems:'center', marginTop:'18px', borderTop:'1px solid var(--rule)', padding:'10px 0' }}>
+          <span className="resume-filterlabel" style={{ fontSize:'11px', textTransform:'uppercase', letterSpacing:'.18em', color:'var(--muted)', fontWeight:900, paddingRight:'20px', borderRight:'1px solid var(--rule)', marginRight:'16px' }}>
             Highlight Relevance
           </span>
           {FILTERS.map(fc => {
             const on = filter === fc.key
             return (
-              <button key={fc.key} onClick={() => toggle(fc.key)} style={{
+              <button key={fc.key} className="resume-filterbtn" onClick={() => toggle(fc.key)} style={{
                 display:'flex', alignItems:'center', gap:'6px', marginRight:'10px',
                 fontSize:'11px', fontWeight:700, textTransform:'uppercase', letterSpacing:'.1em',
                 padding:'6px 14px', border:'1px solid', cursor:'pointer',
@@ -214,19 +233,28 @@ export default function Resume() {
             )
           })}
         </div>
+
+        {/* Key Numbers strip — mobile only */}
+        <div className="resume-keynumbers-mobile" style={{ display:'none', gridTemplateColumns:'1fr 1fr', border:'1px solid var(--ink)', marginTop:'16px' }}>
+          {KEY_NUMBERS.map((kn,i) => (
+            <div key={i} style={{
+              padding:'12px 14px',
+              borderRight: i % 2 === 0 ? '1px solid var(--rule)' : 'none',
+              borderBottom: i < 2 ? '1px solid var(--rule)' : 'none',
+            }}>
+              <div style={{ fontFamily:'var(--serif)', fontSize:'22px', fontWeight:700, color: kn.accent ? 'var(--burg)' : 'var(--ink)', lineHeight:1 }}>{kn.value}</div>
+              <div style={{ fontSize:'9px', textTransform:'uppercase', letterSpacing:'.1em', color:'var(--muted)', fontWeight:700, marginTop:'4px' }}>{kn.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* BODY */}
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr' }}>
+      <div className="resume-body" style={{ display:'grid', gridTemplateColumns:'220px 1fr' }}>
 
         {/* SIDEBAR */}
-        <div style={{ padding:'28px 22px 28px 28px', borderRight:'1px solid var(--rule)', position:'sticky', top:'52px', height:'calc(100vh - 52px)', overflowY:'auto' }}>
-          {[
-            { label:'Contact', items:['zeineddinbachtiar@gmail.com','linkedin.com/in/zeineddin-ahmad-bachtiar','+62 812 3386 2025','Surabaya, Indonesia'] },
-            { label:'Education', items:[<><strong>ITS Surabaya</strong></>, 'B.Eng Computer Engineering', 'Aug 2021 – Aug 2025', 'GPA 3.34 / 4.00'] },
-            { label:'Languages', items:['Indonesian — Native','English — Professional'] },
-            { label:'Key Numbers', items:[<><strong>3.34</strong> GPA / 4.00</>, <><strong>3</strong> Work Experiences</>, <><strong>17</strong> Certifications</>, <><strong>4</strong> Projects</>] },
-          ].map((sec,i) => (
+        <div className="resume-sidebar" style={{ padding:'28px 22px 28px 28px', borderRight:'1px solid var(--rule)', position:'sticky', top:'52px', height:'calc(100vh - 52px)', overflowY:'auto' }}>
+          {sidebarSectionsDesktop.map((sec,i) => (
             <div key={i} style={{ marginBottom:'24px' }}>
               <div style={{ fontSize:'11px', textTransform:'uppercase', letterSpacing:'.18em', color:'var(--burg)', fontWeight:900, borderBottom:'1px solid var(--rule)', paddingBottom:'5px', marginBottom:'10px' }}>{sec.label}</div>
               {sec.items.map((item,j) => <div key={j} style={{ fontSize:'14.5px', color:'var(--muted)', fontWeight:500, padding:'3px 0', lineHeight:1.55 }}>{item}</div>)}
@@ -235,7 +263,7 @@ export default function Resume() {
         </div>
 
         {/* MAIN */}
-        <div style={{ padding:'28px 32px' }}>
+        <div className="resume-main" style={{ padding:'28px 32px' }}>
 
           {/* Experience */}
           <div style={{ marginBottom:'36px' }}>
@@ -306,7 +334,7 @@ export default function Resume() {
           {/* Skills */}
           <div style={{ marginBottom:'36px' }}>
             <SecHead title="Core Competencies" />
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', borderTop:'1px solid var(--rule)' }}>
+            <div className="resume-skills-grid" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', borderTop:'1px solid var(--rule)' }}>
               {skCell('Business & Operations',
                 <div style={{ fontSize:'13.5px', color:'var(--muted)', fontWeight:500, lineHeight:1.75 }}>Process Mapping, SOP Development, Workflow Documentation, Business Process Analysis, Requirements Gathering, SDLC, Cross-functional Coordination, Stakeholder Management, Vendor Evaluation</div>,
                 true, true, false, false, false, false)}
@@ -364,6 +392,29 @@ export default function Resume() {
             <RItem f={filter} ops odp biz={false} role="Legislative Council Member" org="Student Legislative Council (BLM) · ELECTICS Faculty, ITS" date="Feb 2023 – Jan 2024 · Surabaya"
               points={['Drafted and reviewed 7 legislative documents representing 1,000+ students','Translated grassroots concerns into formal institutional feedback at monthly plenary sessions']}
               tags={['Documentation','Institutional']} />
+          </div>
+
+          {/* Contact / Education / Languages — mobile only, segmented toggle */}
+          <div className="resume-contact-tabs-mobile" style={{ display:'none', marginTop:'8px' }}>
+            <div style={{ display:'flex', border:'1px solid var(--ink)' }}>
+              {SIDEBAR.map((sec,i) => (
+                <button key={i} onClick={() => setMobileTab(i)} style={{
+                  flex:1, textAlign:'center', padding:'10px 4px',
+                  fontSize:'10px', fontFamily:'var(--sans)', fontWeight:900,
+                  textTransform:'uppercase', letterSpacing:'.08em', cursor:'pointer',
+                  border:'none', borderLeft: i > 0 ? '1px solid var(--rule)' : 'none',
+                  background: mobileTab === i ? 'var(--ink)' : 'transparent',
+                  color: mobileTab === i ? 'var(--paper)' : 'var(--muted)',
+                }}>
+                  {sec.label}
+                </button>
+              ))}
+            </div>
+            <div style={{ border:'1px solid var(--ink)', borderTop:'none', padding:'16px' }}>
+              {SIDEBAR[mobileTab].items.map((item,j) => (
+                <div key={j} style={{ fontSize:'14.5px', color:'var(--muted)', fontWeight:500, padding:'3px 0', lineHeight:1.55 }}>{item}</div>
+              ))}
+            </div>
           </div>
 
         </div>

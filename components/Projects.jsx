@@ -31,7 +31,7 @@ const PROJECTS = [
     desc: 'Full-stack IoT system tracking lathe machine lifespan via Hall effect sensors with real-time web dashboard and MongoDB backend. Hardware to deployment.',
     metric: null,
     tools: ['ESP32', 'Next.js', 'React.js', 'Express.js', 'MongoDB'],
-    img: '/assets/projects/thesis_1.png',
+    img: '/assets/projects/thesis_2.jpg',
   },
   {
     slug: 'google-maps-crawler',

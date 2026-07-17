@@ -31,8 +31,8 @@ export default function Footer() {
             <em style={{ fontStyle: 'italic', color: 'var(--burg)' }}>structured</em><br />
             solutions.
           </div>
-          <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.6, maxWidth: '360px', fontWeight: 500, textAlign: 'justify' }}>
-            <span style={{ fontSize: '14px', fontWeight: 600 }}>Open to full-time roles,</span>{' '}
+          <p style={{ fontSize: '15px', color: 'var(--muted)', lineHeight: 1.6, maxWidth: '360px', fontWeight: 500, textAlign: 'justify' }}>
+            <span style={{ fontSize: '16px', fontWeight: 600 }}>Open to full-time roles,</span>{' '}
             ODP/Management Trainee programs, Business/Data Analytics, Software Development, and Operations positions across Indonesia and regionally.
           </p>
         </div>

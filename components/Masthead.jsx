@@ -30,42 +30,31 @@ export default function Masthead() {
         </div>
       </div>
 
-      {/* Giant nameplate */}
-      <div className="nameplate-wrap" style={{ padding: '18px 24px 16px', borderBottom: '1px solid var(--rule)' }}>
-        <div style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.22em', color: 'var(--burg)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ display: 'block', width: '16px', height: '1px', background: 'var(--burg)' }} />
-          Portfolio — Edition Q2 2026
-        </div>
-        <div style={{ fontFamily: 'var(--serif)', fontWeight: 700, lineHeight: .84, letterSpacing: '-.04em' }}>
-          <span style={{ fontSize: 'clamp(44px,9vw,104px)', display: 'block', color: 'var(--burg)' }}>ZEINEDDIN</span>
-          <span style={{ fontSize: 'clamp(44px,9vw,104px)', display: 'block', color: 'var(--ink)', fontStyle: 'italic', paddingLeft: 'clamp(8px,2vw,28px)' }}>Ahmad Bachtiar.</span>
-        </div>
-      </div>
+      {/* Nameplate overlapping photo */}
+      <div className="masthead-overlap" style={{ position: 'relative', borderBottom: '1px solid var(--rule)', height: 'clamp(360px,32vw,560px)', overflow: 'hidden' }}>
 
-      {/* 4-zone hero */}
-      <div className="hero-grid" style={{
-        display: 'grid',
-        gridTemplateColumns: '2.6fr 1px 1.2fr 1px 1.1fr 1px 1fr',
-        minHeight: '320px',
-      }}>
-
-        {/* Zone 1 — summary */}
-        <div className="zone1" style={{ padding: '24px 24px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--burg)', marginBottom: '12px', borderBottom: '1px solid var(--rule)', paddingBottom: '6px' }}>
-              The Core Thesis
-            </div>
-            <div style={{ fontFamily: 'var(--serif)', fontSize: '23px', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-.02em', marginBottom: '4px' }}>
-              Bridging data architecture
-            </div>
-            <div style={{ fontFamily: 'var(--serif)', fontSize: '23px', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-.02em', fontStyle: 'italic', color: 'var(--burg)', marginBottom: '14px' }}>
-              and operational excellence.
-            </div>
-            <p style={{ fontSize: '14px', fontWeight: 500, color: 'var(--muted)', lineHeight: 1.75, maxWidth: '420px', textAlign: 'justify' }}>
-              Computer Engineering graduate from ITS with hands-on experience across data analysis, software development, and business process design — comfortable moving between technical build and structured business work. Open to ODP / MT, Business and Data Analyst, Operations, and Software Developer roles.
-            </p>
+        <div className="masthead-textblock" style={{ position: 'relative', zIndex: 2, maxWidth: '58%', height: '100%', padding: '26px 24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.22em', color: 'var(--burg)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ display: 'block', width: '16px', height: '1px', background: 'var(--burg)' }} />
+            Portfolio — Edition Q2 2026
           </div>
-          <div className="zone1-btns" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '20px', paddingLeft: '24px' }}>
+
+          <div style={{ fontFamily: 'var(--serif)', fontWeight: 700, lineHeight: .86, letterSpacing: '-.03em' }}>
+            <span style={{ fontSize: 'clamp(38px,7vw,185px)', display: 'block', color: 'var(--burg)', textTransform: 'uppercase' }}>Zeineddin</span>
+            <span className="masthead-name-line2" style={{ fontSize: 'clamp(34px,6vw,158px)', display: 'block', fontStyle: 'italic', textAlign: 'right' }}>
+              Ahmad Bachtiar
+            </span>
+          </div>
+
+          <div style={{ fontFamily: 'var(--serif)', fontSize: '22px', fontWeight: 700, lineHeight: 1.3, marginTop: '18px', maxWidth: '400px' }}>
+            Bridging data architecture and <em style={{ fontStyle: 'italic', color: 'var(--burg)' }}>operational excellence.</em>
+          </div>
+
+          <p style={{ fontSize: '16px', fontWeight: 500, color: 'var(--muted)', lineHeight: 1.7, maxWidth: '500px', marginTop: '10px', textAlign: 'justify' }}>
+            Computer Engineering graduate from ITS with hands-on experience across data analysis, software development, and business process design — comfortable moving between technical build and structured business work.
+          </p>
+
+          <div className="masthead-btns" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '18px' }}>
             <a href="/resume" style={{ padding: '10px 18px', fontSize: '10.5px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.14em', background: 'var(--ink)', color: 'var(--paper)', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'background .18s', cursor: 'pointer' }}
               onMouseEnter={e => e.currentTarget.style.background = 'var(--burg)'}
               onMouseLeave={e => e.currentTarget.style.background = 'var(--ink)'}
@@ -81,69 +70,51 @@ export default function Masthead() {
           </div>
         </div>
 
-        <div className="vdiv" style={{ background: 'var(--ink)', width: '1px' }} />
+        <div className="masthead-photo" style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '54%', zIndex: 1, overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(12,10,7,.05) 2px,rgba(12,10,7,.05) 3px)', pointerEvents: 'none', zIndex: 1 }} />
+          <img
+            src="/assets/pic_masthead.jpg"
+            alt="Zeineddin Ahmad Bachtiar"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', filter: 'grayscale(1) contrast(1.05)' }}
+          />
+        </div>
+      </div>
 
-        {/* Zone 2 — photo */}
-        <div className="zone2" style={{ background: '#C8B888', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-            <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(12,10,7,.05) 2px,rgba(12,10,7,.05) 3px)', pointerEvents: 'none' }} />
-            <img
-              src="/assets/pic_masthead.jpg"
-              alt="Zeineddin Ahmad Bachtiar"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', position: 'relative', zIndex: 1 }}
-            />
+      {/* Data box — stats + status, asymmetric */}
+      <div className="masthead-databox" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
+        {[
+          { n: '3.34', l: 'GPA / 4.00' },
+          { n: '3',    l: 'Work Experiences' },
+          { n: '17',   l: 'Certifications' },
+          { n: '4',    l: 'Projects' },
+        ].map((stat, i) => (
+          <div key={i} className="masthead-stat" style={{ padding: '16px 18px', borderRight: i < 3 ? '1px solid var(--rule)' : 'none', borderBottom: '1px solid var(--rule)' }}>
+            <div style={{ fontFamily: 'var(--serif)', fontSize: '26px', fontWeight: 700, color: i === 0 ? 'var(--burg)' : 'var(--ink)', lineHeight: 1 }}>{stat.n}</div>
+            <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.1em', color: 'var(--muted)', fontWeight: 700, marginTop: '4px' }}>{stat.l}</div>
           </div>
-          <div style={{ background: 'var(--ink)', color: 'var(--paper)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.16em', padding: '5px 12px', fontWeight: 900 }}>
-            Zeineddin Ahmad Bachtiar · 2025
+        ))}
+
+        <div className="masthead-stat" style={{ padding: '16px 18px', borderRight: '1px solid var(--rule)' }}>
+          <div style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--burg)', marginBottom: '4px' }}>Education</div>
+          <div style={{ fontFamily: 'var(--serif)', fontSize: '14px', fontWeight: 700 }}>Institut Teknologi Sepuluh Nopember</div>
+          <div style={{ fontSize: '14px', color: 'var(--muted)', marginTop: '2px', fontWeight: 500 }}>B.Eng Computer Engineering · 2025</div>
+        </div>
+
+        <div className="masthead-stat" style={{ padding: '16px 18px', borderRight: '1px solid var(--rule)' }}>
+          <div style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--burg)', marginBottom: '4px' }}>Based In</div>
+          <div style={{ fontFamily: 'var(--serif)', fontSize: '14px', fontWeight: 700 }}>Surabaya, Indonesia</div>
+          <div style={{ fontSize: '14px', color: 'var(--muted)', marginTop: '2px', fontWeight: 500 }}>+62 812 3386 2025</div>
+        </div>
+
+        <div className="masthead-status" style={{ gridColumn: 'span 2', background: 'var(--ink)', color: 'var(--paper)', padding: '16px 18px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.1em' }}>
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#97C459', display: 'inline-block', flexShrink: 0 }} />
+            Open to Opportunities
+          </span>
+          <div style={{ fontSize: '13px', color: 'var(--rule)', marginTop: '6px', lineHeight: 1.6 }}>
+            ODP / Management Trainee · Business & Data Analytics · Software Developer · Operations
           </div>
         </div>
-
-        <div className="vdiv" style={{ background: 'var(--ink)', width: '1px' }} />
-
-        {/* Zone 3 — stats */}
-        <div className="zone3" style={{ display: 'flex', flexDirection: 'column' }}>
-          {[
-            { n: '3.34', l: 'GPA / 4.00',       s: 'Institut Teknologi Sepuluh Nopember' },
-            { n: '3',    l: 'Work Experiences',  s: 'Ops · Dev · Research'               },
-            { n: '17',   l: 'Certifications',    s: 'Microsoft · Snowflake · IBM'        },
-            { n: '4',    l: 'Projects',          s: 'Data · IoT · Automation'            },
-          ].map((stat, i) => (
-            <div key={i} className="zone3-item" style={{
-              flex: 1, padding: '0 18px',
-              borderBottom: i < 3 ? '1px solid var(--rule)' : 'none',
-              display: 'flex', flexDirection: 'column', justifyContent: 'center',
-              minHeight: '78px',
-            }}>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '28px', fontWeight: 700, lineHeight: 1, color: 'var(--ink)' }}>{stat.n}</div>
-              <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.18em', color: 'var(--muted)', fontWeight: 800, marginTop: '3px' }}>{stat.l}</div>
-              <div style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 400, marginTop: '1px' }}>{stat.s}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="vdiv" style={{ background: 'var(--ink)', width: '1px' }} />
-
-        {/* Zone 4 — status */}
-        <div className="zone4" style={{ display: 'flex', flexDirection: 'column', padding: '20px 18px', gap: 0 }}>
-          {[
-            { label: 'Status', lines: ['Open to full-time roles', 'ODP · Management Trainee', 'Business and Data Analytics', 'Software Developer'] },
-            { label: 'Education', lines: ['Institut Teknologi Sepuluh Nopember', 'B.Eng Computer Engineering', 'Aug 2021 – Aug 2025'] },
-            { label: 'Based In', lines: ['Surabaya, Indonesia', '+62 812 3386 2025'] },
-          ].map((block, i, arr) => (
-            <div key={i} className="zone4-block" style={{ paddingBottom: '18px', marginBottom: '18px', borderBottom: i < arr.length - 1 ? '1px solid var(--rule)' : 'none' }}>
-              <div style={{ fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.2em', color: 'var(--burg)', marginBottom: '8px', borderBottom: '1px solid var(--rule)', paddingBottom: '5px' }}>
-                {block.label}
-              </div>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '14px', fontWeight: 400, lineHeight: 1.5, color: 'var(--ink)' }}>
-                {block.lines[0]}
-                {block.lines.slice(1).map((line, j) => (
-                  <span key={j} style={{ display: 'block', fontFamily: 'var(--sans)', fontSize: '13px', fontWeight: 400, color: 'var(--muted)', marginTop: '1px' }}>{line}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
       </div>
     </header>
   )
